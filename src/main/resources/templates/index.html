@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Votación Estudiantil</title>
+    <link rel="stylesheet" th:href="@{/css/style-index.css}">
+</head>
+<body>
+<div class="video-background">
+    <video autoplay loop muted>
+        <source th:src="@{/video/background.mp4}" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+</div>
+<div class="container">
+    <h1>Bienvenido al Sistema de Votación Estudiantil</h1>
+    <p class="intro">Participa en la toma de decisiones de tu institución educativa. Vota por tus representantes y actividades preferidas.</p>
+    <div class="features">
+        <div class="feature">
+            <i class="icon-vote"></i>
+            <h3>Vota en línea</h3>
+            <p>Emite tu voto de forma segura y fácil desde cualquier dispositivo.</p>
+        </div>
+        <div class="feature">
+            <i class="icon-results"></i>
+            <h3>Resultados en tiempo real</h3>
+            <p>Observa los resultados actualizados al instante.</p>
+        </div>
+        <div class="feature">
+            <i class="icon-forum"></i>
+            <h3>Foro de discusión</h3>
+            <p>Participa en debates y comparte tus opiniones.</p>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/login}" class="btn">Iniciar Sesión</a></li>
+            <li><a th:href="@{/registro}" class="btn">Registrarse</a></li>
+            <li><a th:href="@{/votaciones}" class="btn">Votar</a></li>
+            <li><a th:href="@{/resultados-votaciones}" class="btn">Ver Resultados</a></li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
+

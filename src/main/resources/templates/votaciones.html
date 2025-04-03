@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votaciones</title>
+    <link rel="stylesheet" th:href="@{/css/style-votaciones.css}">
+</head>
+<body>
+<div class="background-video">
+    <video autoplay loop muted>
+        <source th:src="@{/video/votaciones.mp4}" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+</div>
+
+<div class="container">
+    <h2>Votaciones</h2>
+    <form method="post" th:action="@{/votar}">
+        <h3>Candidatos</h3>
+        <div th:each="candidato : ${candidatos}" class="card">
+            <input type="radio" th:id="'candidato_' + ${candidato.id}" name="candidatoId" th:value="${candidato.id}" required>
+            <label th:for="'candidato_' + ${candidato.id}" class="label">
+                <span th:text="${candidato.nombre + ' - ' + candidato.cargo}"></span>
+            </label>
+            <img th:src="@{${candidato.foto}}" th:alt="'Foto de ' + ${candidato.nombre}" class="candidate-photo">
+            <p th:text="${candidato.propuestas}"></p>
+        </div>
+
+        <h3>Actividades Recreativas</h3>
+        <div th:each="actividad : ${actividades}" class="card">
+            <input type="radio" th:id="'actividad_' + ${actividad.id}" name="actividadId" th:value="${actividad.id}" required>
+            <label th:for="'actividad_' + ${actividad.id}" class="label">
+                <span th:text="${actividad.nombre + ' - ' + actividad.fecha}"></span>
+            </label>
+            <p th:text="${actividad.descripcion}"></p>
+        </div>
+
+        <button type="submit" class="button">Votar</button>
+    </form>
+    <p><a th:href="@{/foro}" class="link">Volver al Foro</a></p>
+</div>
+</body>
+</html>
+

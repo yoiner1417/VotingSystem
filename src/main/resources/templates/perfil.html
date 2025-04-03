@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" th:href="@{/css/perfil.css}">
+</head>
+<body>
+<video id="background-video" autoplay muted loop>
+    <source th:src="@{/video/perfil.mp4}" type="video/mp4">
+    Tu navegador no soporta videos.
+</video>
+
+<h2>Mi Perfil</h2>
+
+<p th:if="${mensaje}" th:text="${mensaje}" class="success"></p>
+
+<form method="post" th:action="@{/perfil}">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" th:value="${user.nombre}" required>
+
+    <label for="correo">Email:</label>
+    <input type="email" id="correo" name="correo" th:value="${user.correo}" required>
+
+    <label for="contrasena">Nueva Contraseña (dejar en blanco para no cambiar):</label>
+    <input type="password" id="contrasena" name="contrasena">
+
+    <button type="submit">Actualizar Perfil</button>
+</form>
+
+<p><a th:href="@{/foro}">Volver al Foro</a></p>
+</body>
+</html>
+

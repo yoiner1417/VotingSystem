@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votaciones Cerradas</title>
+    <link rel="stylesheet" th:href="@{/css/style-votaciones.css}">
+</head>
+<body>
+<div class="background-video">
+    <video autoplay loop muted>
+        <source th:src="@{/video/votaciones.mp4}" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+</div>
+<div class="container">
+    <h2>Votaciones Cerradas</h2>
+    <p>Lo sentimos, las votaciones están cerradas en este momento.</p>
+    <p>Por favor, vuelve más tarde cuando se abran las votaciones.</p>
+    <a th:href="@{/foro}" class="button">Volver al Foro</a>
+</div>
+</body>
+</html>
+

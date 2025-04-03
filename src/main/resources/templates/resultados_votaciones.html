@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de las Votaciones</title>
+    <link rel="stylesheet" th:href="@{/css/style-resultados-votaciones.css}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<video autoplay loop muted>
+    <source th:src="@{/video/video 5.mp4}" type="video/mp4">
+    Tu navegador no soporta el elemento de video.
+</video>
+
+<div class="container">
+    <h2 class="title">Resultados de las Votaciones</h2>
+
+    <div class="section">
+        <h3 class="subtitle">Resultados de Candidatos</h3>
+        <canvas id="candidatosChart"></canvas>
+    </div>
+
+    <div class="section">
+        <h3 class="subtitle">Resultados de Actividades Recreativas</h3>
+        <canvas id="actividadesChart"></canvas>
+    </div>
+
+    <div class="stats">
+        <div class="stat-item">
+            <h4>Total de Votos</h4>
+            <p th:text="${totalVotos}"></p>
+        </div>
+        <div class="stat-item">
+            <h4>Participación</h4>
+            <p th:text="${#numbers.formatDecimal(porcentajeParticipacion, 1, 2)} + '%'"></p>
+        </div>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/foro}" class="link">Volver al Foro</a>
+        <a th:href="@{/}" class="link">Página Principal</a>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var candidatosData = /*[[${resultadosCandidatos}]]*/ {};
+    var actividadesData = /*[[${resultadosActividades}]]*/ {};
+
+    // Gráfico de Candidatos
+    new Chart(document.getElementById('candidatosChart'), {
+        type: 'bar',
+        data: {
+            labels: Object.keys(candidatosData),
+            datasets: [{
+                label: 'Votos',
+                data: Object.values(candidatosData),
+                backgroundColor: 'rgba(54, 162, 235, 0.8)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Gráfico de Actividades
+    new Chart(document.getElementById('actividadesChart'), {
+        type: 'pie',
+        data: {
+            labels: Object.keys(actividadesData),
+            datasets: [{
+                data: Object.values(actividadesData),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Actividad Recreativa</title>
+    <link rel="stylesheet" th:href="@{/css/gestionar_actividades.css}">
+</head>
+<body>
+    <div id="background-video">
+        <video autoplay loop muted>
+            <source th:src="@{/video/actividades.mp4}" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+    <div class="content">
+        <h2>Editar Actividad Recreativa</h2>
+
+        <form th:action="@{/admin/actividades/editar}" method="post">
+            <input type="hidden" name="id" th:value="${actividad.id}">
+
+            <label for="nombre">Nombre de la Actividad:</label>
+            <input type="text" id="nombre" name="nombre" th:value="${actividad.nombre}" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" required th:text="${actividad.descripcion}"></textarea>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" th:value="${#temporals.format(actividad.fecha, 'yyyy-MM-dd')}" required>
+
+            <button type="submit">Actualizar Actividad</button>
+        </form>
+
+        <p><a th:href="@{/admin/actividades}">Volver a la lista de actividades</a></p>
+    </div>
+</body>
+</html>
+

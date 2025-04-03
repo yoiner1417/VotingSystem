@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Candidatos</title>
+    <link rel="stylesheet" th:href="@{/css/gestionar_candidatos.css}">
+</head>
+<body>
+<div class="video-container">
+    <video autoplay muted loop class="background-video">
+        <source th:src="@{/video/candidatos.mp4}" type="video/mp4">
+        Tu navegador no soporta la reproducción de videos.
+    </video>
+</div>
+<div class="content">
+    <h2>Gestionar Candidatos</h2>
+
+    <div th:if="${mensaje}" th:text="${mensaje}" th:class="${mensaje.startsWith('Error') ? 'error' : 'success'}"></div>
+
+    <!-- ... (resto del contenido sin cambios) ... -->
+
+    <h3>Lista de Candidatos</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Propuestas</th>
+            <th>Foto</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="candidato : ${candidatos}">
+            <td th:text="${candidato.nombre}"></td>
+            <td th:text="${candidato.cargo}"></td>
+            <td th:text="${candidato.propuestas}"></td>
+            <td><img th:src="@{'/uploads/' + ${candidato.foto}}" alt="Foto del candidato" width="100"></td>
+            <td>
+                <a th:href="@{'/admin/candidatos/editar/' + ${candidato.id}}">Editar</a>
+                <a th:href="@{'/admin/candidatos/eliminar/' + ${candidato.id}}" onclick="return confirm('¿Estás seguro de que quieres eliminar este candidato?')">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+            <span th:if="${currentPage > 0}">
+                <a th:href="@{/admin/candidatos(page=${currentPage - 1})}">Anterior</a>
+            </span>
+        <span th:each="i: ${#numbers.sequence(0, totalPages - 1)}">
+                <a th:href="@{/admin/candidatos(page=${i})}" th:text="${i + 1}" th:class="${currentPage == i ? 'active' : ''}"></a>
+            </span>
+        <span th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/admin/candidatos(page=${currentPage + 1})}">Siguiente</a>
+            </span>
+    </div>
+
+    <p><a th:href="@{/admin/panel}">Volver al Panel de Administración</a></p>
+</div>
+</body>
+</html>
+

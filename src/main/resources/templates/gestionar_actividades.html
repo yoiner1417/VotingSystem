@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Actividades Recreativas</title>
+    <link rel="stylesheet" th:href="@{/css/gestionar_actividades.css}">
+</head>
+<body>
+<div id="background-video">
+    <video autoplay loop muted>
+        <source th:src="@{/video/actividades.mp4}" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+</div>
+<div class="content">
+    <h2>Gestionar Actividades Recreativas</h2>
+
+    <div th:if="${mensaje}" th:text="${mensaje}" th:class="${mensaje.startsWith('Error') ? 'error' : 'success'}"></div>
+
+    <h3>Agregar Nueva Actividad</h3>
+    <form th:action="@{/admin/actividades/agregar}" method="post">
+        <label for="nombre">Nombre de la Actividad:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <button type="submit">Agregar Actividad</button>
+    </form>
+
+    <h3>Lista de Actividades</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="actividad : ${actividades}">
+            <td th:text="${actividad.nombre}"></td>
+            <td th:text="${actividad.descripcion}"></td>
+            <td th:text="${#temporals.format(actividad.fecha, 'dd-MM-yyyy')}"></td>
+            <td>
+                <a th:href="@{'/admin/actividades/editar/' + ${actividad.id}}">Editar</a>
+                <a th:href="@{'/admin/actividades/eliminar/' + ${actividad.id}}" onclick="return confirm('¿Estás seguro de que quieres eliminar esta actividad?')">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><a th:href="@{/admin/panel}">Volver al Panel de Administración</a></p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Novedad</title>
+    <link rel="stylesheet" th:href="@{/css/style-publicar-novedad.css}">
+</head>
+<body>
+<video id="background-video" autoplay muted loop>
+    <source th:src="@{/video/video 2.mp4}" type="video/mp4">
+    Tu navegador no soporta videos.
+</video>
+
+<h2>Publicar Novedad</h2>
+
+<form method="post" th:action="@{/admin/novedades}" id="formNovedad">
+    <input type="hidden" id="id" name="id">
+    <label for="titulo">Título de la novedad:</label>
+    <input type="text" id="titulo" name="titulo" required maxlength="255">
+
+    <label for="contenido">Contenido de la novedad:</label>
+    <textarea id="contenido" name="contenido" required rows="6"></textarea>
+
+    <button type="submit" id="btnPublicar">Publicar Novedad</button>
+</form>
+
+<h3>Últimas Novedades Publicadas</h3>
+<table>
+    <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Fecha de Publicación</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="novedad : ${novedades}">
+        <td th:text="${novedad.titulo}"></td>
+        <td th:text="${novedad.autor}"></td>
+        <td th:text="${novedad.fechaPublicacion}"></td>
+        <td>
+            <button th:onclick="'editarNovedad(' + ${novedad.id} + ')'">Editar</button>
+            <a th:href="@{/admin/novedades/eliminar/{id}(id=${novedad.id})}" onclick="return confirm('¿Estás seguro de que quieres eliminar esta novedad?');">Eliminar</a>
+        </td>
+    </tr>
+</table>
+
+<script th:inline="javascript">
+    function editarNovedad(id) {
+        var novedad = /*[[${novedades}]]*/ null;
+        var novedadSeleccionada = novedad.find(n => n.id === id);
+        document.getElementById('id').value = novedadSeleccionada.id;
+        document.getElementById('titulo').value = novedadSeleccionada.titulo;
+        document.getElementById('contenido').value = novedadSeleccionada.contenido;
+        document.getElementById('btnPublicar').textContent = 'Actualizar Novedad';
+        document.getElementById('formNovedad').action = /*[[@{/admin/novedades/editar}]]*/ '';
+    }
+</script>
+
+<p><a th:href="@{/admin/panel}">Volver al Panel de Administrador</a></p>
+</body>
+</html>
+

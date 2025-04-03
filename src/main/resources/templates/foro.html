@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro Estudiantil</title>
+    <link rel="stylesheet" th:href="@{/css/foro.css}">
+</head>
+<body>
+<div class="video-container">
+    <video autoplay muted loop class="background-video">
+        <source th:src="@{/video/salon3.mp4}" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+    </video>
+</div>
+<div class="content">
+    <h2>Foro Estudiantil</h2>
+    <div class="user-menu">
+        <a th:href="@{/perfil}">Mi Perfil</a>
+        <a th:href="@{/votaciones}">Votar</a>
+        <a th:href="@{/resultados-votaciones}">Ver Resultados</a>
+    </div>
+    <div class="buscador">
+        <input type="text" class="barra-buscar" placeholder="Buscar en el foro...">
+        <button class="boton-buscar">Buscar</button>
+    </div>
+    <div th:each="publicacion : ${publicaciones}" class="publicacion">
+        <h4 th:text="${publicacion.titulo}"></h4>
+        <p th:text="${publicacion.contenido}"></p>
+        <small th:text="${'Por ' + publicacion.autor + ' el ' + publicacion.fechaPublicacion}"></small>
+        <div class="etiquetas">
+            <span th:each="etiqueta : ${publicacion.etiquetas}" class="etiqueta" th:text="${etiqueta}"></span>
+        </div>
+        <a th:href="@{'/comentar/' + ${publicacion.id}}" class="enlace-comentar">Comentar</a>
+    </div>
+    <div class="paginacion">
+        <a href="#" th:each="pagina : ${#numbers.sequence(1, totalPaginas)}"
+           th:text="${pagina}"
+           th:class="${pagina == paginaActual ? 'activa' : ''}"></a>
+    </div>
+    <p><a th:href="@{/logout}" class="logout-link">Cerrar Sesión</a></p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Candidato</title>
+    <link rel="stylesheet" th:href="@{/css/gestionar_candidatos.css}">
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop class="background-video">
+            <source th:src="@{/video/candidatos.mp4}" type="video/mp4">
+            Tu navegador no soporta la reproducción de videos.
+        </video>
+    </div>
+    <div class="content">
+        <h2>Editar Candidato</h2>
+
+        <form th:action="@{/admin/candidatos/editar}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${candidato.id}">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" th:value="${candidato.nombre}" required>
+
+            <label for="cargo">Cargo:</label>
+            <select id="cargo" name="cargo" required>
+                <option value="Personero" th:selected="${candidato.cargo == 'Personero'}">Personero</option>
+                <option value="Contralor" th:selected="${candidato.cargo == 'Contralor'}">Contralor</option>
+                <option value="Cabildante" th:selected="${candidato.cargo == 'Cabildante'}">Cabildante</option>
+            </select>
+
+            <label for="propuestas">Propuestas:</label>
+            <textarea id="propuestas" name="propuestas" required th:text="${candidato.propuestas}"></textarea>
+
+            <label for="foto">Foto actual:</label>
+            <img th:src="@{'/uploads/' + ${candidato.foto}}" alt="Foto actual del candidato" width="100">
+
+            <label for="nuevaFoto">Nueva foto (opcional):</label>
+            <input type="file" id="nuevaFoto" name="foto" accept="image/*">
+
+            <button type="submit">Actualizar Candidato</button>
+        </form>
+
+        <p><a th:href="@{/admin/candidatos}">Volver a la lista de candidatos</a></p>
+    </div>
+</body>
+</html>
+

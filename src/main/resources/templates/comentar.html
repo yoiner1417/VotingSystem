@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentar Publicación</title>
+    <link rel="stylesheet" th:href="@{/css/comentar.css}">
+</head>
+<body>
+<video id="background-video" autoplay muted loop>
+    <source th:src="@{/video/comentar.mp4}" type="video/mp4">
+    Tu navegador no soporta videos.
+</video>
+<div class="content">
+    <h2>Comentar Publicación</h2>
+    <div class="publicacion">
+        <h3 th:text="${publicacion.titulo}"></h3>
+        <p th:text="${publicacion.contenido}"></p>
+        <small th:text="${'Por ' + publicacion.autor + ' el ' + publicacion.fechaPublicacion}"></small>
+    </div>
+    <h3>Comentarios</h3>
+    <div th:each="comentario : ${comentarios}" class="comentario">
+        <p th:text="${comentario.contenido}"></p>
+        <small th:text="${'Por ' + comentario.autor + ' el ' + comentario.fechaComentario}"></small>
+    </div>
+    <form th:action="@{/comentar}" method="post">
+        <input type="hidden" name="publicacionId" th:value="${publicacion.id}">
+        <textarea name="contenido" rows="4" placeholder="Escribe tu comentario aquí" required></textarea>
+        <button type="submit">Enviar Comentario</button>
+    </form>
+    <p><a th:href="@{/foro}" class="forum-link">Volver al Foro</a></p>
+</div>
+</body>
+</html>
+

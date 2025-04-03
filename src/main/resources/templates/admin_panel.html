@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" th:href="@{/css/admin_panel.csss}">
+</head>
+<body>
+<div class="video-container">
+    <video autoplay muted loop class="background-video">
+        <source th:src="@{/video/panel2.mp4}" type="video/mp4">
+        Tu navegador no soporta la reproducción de videos.
+    </video>
+</div>
+<div class="content">
+    <h2>Panel de Administrador</h2>
+    <nav>
+        <ul>
+            <li><a th:href="@{/admin/usuarios}">Gestionar Usuarios</a></li>
+            <li><a th:href="@{/admin/candidatos}">Gestionar Candidatos</a></li>
+            <li><a th:href="@{/admin/actividades}">Gestionar Actividades Recreativas</a></li>
+            <li><a th:href="@{/admin/votaciones}">Gestionar Votaciones</a></li>
+        </ul>
+    </nav>
+    <p><a th:href="@{/logout}" class="logout-link">Cerrar Sesión</a></p>
+</div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" th:href="@{/css/admin_panel.css}">
+</head>
+<body>
+<div class="video-container">
+    <video autoplay muted loop class="background-video">
+        <source th:src="@{/video/panel2.mp4}" type="video/mp4">
+        Tu navegador no soporta la reproducción de videos.
+    </video>
+</div>
+<div class="content">
+    <h2>Panel de Administrador</h2>
+    <nav>
+        <ul>
+            <li><a th:href="@{/admin/usuarios}">Gestionar Usuarios</a></li>
+            <li><a th:href="@{/admin/candidatos}">Gestionar Candidatos</a></li>
+            <li><a th:href="@{/admin/actividades}">Gestionar Actividades Recreativas</a></li>
+            <li><a th:href="@{/admin/votaciones}">Gestionar Votaciones</a></li>
+        </ul>
+    </nav>
+    <p><a th:href="@{/logout}" class="logout-link">Cerrar Sesión</a></p>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Votaciones</title>
+    <link rel="stylesheet" th:href="@{/css/gestionar_votaciones.css}">
+</head>
+<body>
+<div class="video-background">
+    <video autoplay loop muted>
+        <source th:src="@{/video/votaciones_admin.mp4}" type="video/mp4">
+        Tu navegador no soporta el elemento de video.
+    </video>
+</div>
+<div class="content">
+    <h2>Gestionar Votaciones</h2>
+
+    <div th:if="${mensaje}" th:text="${mensaje}" th:class="${mensaje.startsWith('Error') ? 'error' : 'success'}"></div>
+
+    <div class="estado-votaciones">
+        <h3>Estado de las Votaciones</h3>
+        <form th:action="@{/admin/votaciones/estado}" method="post">
+            <label for="estadoVotaciones">Estado actual:</label>
+            <select id="estadoVotaciones" name="estado">
+                <option value="ABIERTO" th:selected="${estadoActual == 'ABIERTO'}">Abierto</option>
+                <option value="CERRADO" th:selected="${estadoActual == 'CERRADO'}">Cerrado</option>
+            </select>
+            <button type="submit">Actualizar Estado</button>
+        </form>
+    </div>
+
+    <div class="estadisticas">
+        <div class="metrica">
+            <h4>Total de Votos</h4>
+            <p th:text="${totalVotos}"></p>
+        </div>
+        <div class="metrica">
+            <h4>Usuarios Registrados</h4>
+            <p th:text="${totalUsuarios}"></p>
+        </div>
+        <div class="metrica">
+            <h4>Porcentaje de Participación</h4>
+            <p th:text="${#numbers.formatDecimal(porcentajeParticipacion, 1, 2)} + '%'"></p>
+        </div>
+    </div>
+
+    <p><a th:href="@{/admin/panel}">Volver al Panel de Administración</a></p>
+</div>
+</body>
+</html>
+
