@@ -37,6 +37,8 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .usernameParameter("correo")
+                        .passwordParameter("contrasena")
                         .defaultSuccessUrl("/foro", true)
                         .permitAll()
                 )
@@ -61,5 +63,9 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
+
+    // Eliminamos el método configureGlobal que está causando la referencia circular
+    // Spring Boot configurará automáticamente el AuthenticationManager usando
+    // el UserDetailsService y PasswordEncoder que hemos definido como beans
 }
 
